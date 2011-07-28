@@ -1,0 +1,47 @@
+In archive libArduinoLibraries.a:
+
+EEPROM.o:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000012  00000000  00000000  00000034  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+  1 .data         00000000  00000000  00000000  00000046  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000001  00000000  00000000  00000046  2**0
+                  ALLOC
+  3 .stab         00000450  00000000  00000000  00000048  2**2
+                  CONTENTS, RELOC, READONLY, DEBUGGING
+  4 .stabstr      0000092d  00000000  00000000  00000498  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <_ZN11EEPROMClass5writeEih>:
+uint8_t EEPROMClass::read(int address)
+{
+	return eeprom_read_byte((unsigned char *) address);
+}
+
+void EEPROMClass::write(int address, uint8_t value)
+   0:	cb 01       	movw	r24, r22
+{
+	eeprom_write_byte((unsigned char *) address, value);
+   2:	64 2f       	mov	r22, r20
+   4:	0e 94 00 00 	call	0	; 0x0 <_ZN11EEPROMClass5writeEih>
+}
+   8:	08 95       	ret
+
+0000000a <_ZN11EEPROMClass4readEi>:
+
+/******************************************************************************
+ * User API
+ ******************************************************************************/
+
+uint8_t EEPROMClass::read(int address)
+   a:	cb 01       	movw	r24, r22
+{
+	return eeprom_read_byte((unsigned char *) address);
+   c:	0e 94 00 00 	call	0	; 0x0 <_ZN11EEPROMClass5writeEih>
+}
+  10:	08 95       	ret
